@@ -15,7 +15,7 @@ import MapViewDirections from "react-native-maps-directions";
 //Function to get permission for location
 const { width, height } = Dimensions.get('window');
 export default function App() {
-  const GOOGLE_MAPS_APIKEY = "AIzaSyCnu6NQnBnCi1iIwUeGDmCc3MnbnsMJ3uk";
+  const GOOGLE_MAPS_APIKEY = "";
 
   const [location, setLocation] = useState({
     latitude: -23.881779,
@@ -86,18 +86,36 @@ export default function App() {
         ref={c => this.mapView = c}
         onPress={this.onMapPress}
         showsTraffic={true}
-        cor
+        
         showsUserLocation={true}
+       /* 
+        onUserLocationChange = {(e)=>{
+          console.log("ongrage moving", e.nativeEvent.coordinate)
+          setLocation({
+            latitude: e.nativeEvent.coordinate.altitude,
+            longitude: e.nativeEvent.coordinate.longitude,
+          });
+    
+        }}
+        */
       >
         <Marker
           coordinate={location}
           pinColor="green"
-          draggable={false}
+          draggable={true}
           flat={true}
           // isPreselected ={false}
           onPress={(e) =>
             console.log("onplress event ", e.nativeEvent.coordinate)
           }
+          onDragStart = {(e)=>{
+            console.log("ongrage start", e.nativeEvent.coordinate)
+          }}
+          onDragEnd = {(e)=>{
+            console.log("ongrage end", e.nativeEvent.coordinate)
+          }}
+
+        
         >
 
           <Callout>
